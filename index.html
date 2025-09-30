@@ -145,6 +145,7 @@
         <div id="job-csr" class="rounded-2xl border border-slate-200 bg-white p-6 shadow-soft">
           <div class="text-xs text-slate-500">Customer Service</div>
           <h3 class="mt-1 font-semibold text-lg">Customer Service Representative <a href="#job-csr" class="text-xs text-primary-700 underline align-middle">Link</a></h3>
+          <button data-copy="#job-csr" class="mt-2 text-xs px-2 py-1 rounded border border-slate-300 hover:border-primary-300">Copy link</button>
           <ul class="mt-3 text-sm text-slate-700 space-y-1">
             <li><span class="font-medium">Location:</span> Tirana, Albania</li>
             <li><span class="font-medium">Schedule:</span> Full-time, on-site</li>
@@ -180,6 +181,7 @@
         <div id="job-office-coordinator" class="rounded-2xl border border-slate-200 bg-white p-6 shadow-soft">
           <div class="text-xs text-slate-500">Operations</div>
           <h3 class="mt-1 font-semibold text-lg">Office Coordinator <a href="#job-office-coordinator" class="text-xs text-primary-700 underline align-middle">Link</a></h3>
+          <button data-copy="#job-office-coordinator" class="mt-2 text-xs px-2 py-1 rounded border border-slate-300 hover:border-primary-300">Copy link</button>
           <ul class="mt-3 text-sm text-slate-700 space-y-1">
             <li><span class="font-medium">Location:</span> Tirana, Albania</li>
             <li><span class="font-medium">Schedule:</span> Full-time, on-site</li>
@@ -216,6 +218,7 @@
       <div id="job-it-support" class="rounded-2xl border border-slate-200 bg-white p-6 shadow-soft mt-6">
         <div class="text-xs text-slate-500">IT Support</div>
         <h3 class="mt-1 font-semibold text-lg">IT Support Specialist (First-Level) <a href="#job-it-support" class="text-xs text-primary-700 underline align-middle">Link</a></h3>
+        <button data-copy="#job-it-support" class="mt-2 text-xs px-2 py-1 rounded border border-slate-300 hover:border-primary-300">Copy link</button>
         <ul class="mt-3 text-sm text-slate-700 space-y-1">
           <li><span class="font-medium">Location:</span> Tirana, Albania</li>
           <li><span class="font-medium">Schedule:</span> Full-time, on-site</li>
@@ -460,6 +463,23 @@
     const btn = document.getElementById('menuBtn');
     const menu = document.getElementById('mobileMenu');
     btn?.addEventListener('click', () => menu.classList.toggle('hidden'));
+
+    // Copy link buttons for Careers cards
+    document.querySelectorAll('[data-copy]')?.forEach((el) => {
+      el.addEventListener('click', async () => {
+        const hash = el.getAttribute('data-copy');
+        if (!hash) return;
+        const url = `${window.location.origin}${window.location.pathname}${hash}`;
+        try {
+          await navigator.clipboard.writeText(url);
+          el.textContent = 'Copied!';
+          setTimeout(() => (el.textContent = 'Copy link'), 1500);
+        } catch (e) {
+          // Fallback: update location hash
+          window.location.hash = hash;
+        }
+      });
+    });
   </script>
 </body>
 </html>
